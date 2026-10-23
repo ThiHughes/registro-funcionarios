@@ -13,11 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeSet;
 
-/**
- * Regras de negócio do cadastro: operações de cadastrar, excluir, consultar e listar.
- * Mantém os dados em memória e grava no repositório após cada alteração
- * (se a gravação falhar, a alteração em memória é desfeita).
- */
+
 public class FuncionarioService {
 
     private static final int MAIOR_MATRICULA = 999_999;
@@ -26,7 +22,6 @@ public class FuncionarioService {
     private final List<Funcionario> funcionarios;
     private final List<String> avisosCarga;
 
-    /** Carrega os dados existentes ao ser criado. */
     public FuncionarioService(FuncionarioRepository repositorio) {
         this.repositorio = Objects.requireNonNull(repositorio);
         FuncionarioRepository.ResultadoCarga carga = repositorio.carregar();
@@ -35,26 +30,20 @@ public class FuncionarioService {
         this.avisosCarga = List.copyOf(carga.avisos());
     }
 
-    /** Avisos gerados ao ler o arquivo (linhas inválidas ignoradas, por exemplo). */
     public List<String> getAvisosCarga() {
         return avisosCarga;
     }
 
-    /** Lista todos os funcionários, ordenados por matrícula. */
     public List<Funcionario> listarTodos() {
         return List.copyOf(funcionarios);
     }
 
-    /** Consulta um funcionário específico pela matrícula. */
     public Optional<Funcionario> buscarPorMatricula(String matricula) {
         String m = normalizarMatricula(matricula);
         return funcionarios.stream().filter(f -> f.getMatricula().equals(m)).findFirst();
     }
 
-    /**
-     * Busca combinando filtros opcionais (critério vazio ou nulo é ignorado):
-     * matrícula (exata; "42" equivale a "000042"), cargo e estado (sem diferenciar maiúsculas/minúsculas).
-     */
+
     public List<Funcionario> buscar(String matricula, String cargo, String estado) {
         String m = normalizarMatricula(matricula);
         String c = Validador.normalizarTexto(cargo);
@@ -66,14 +55,12 @@ public class FuncionarioService {
                 .toList();
     }
 
-    /** Cargos distintos existentes, em ordem alfabética. */
     public List<String> listarCargos() {
         TreeSet<String> cargos = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         funcionarios.stream().map(Funcionario::getCargo).forEach(cargos::add);
         return new ArrayList<>(cargos);
     }
 
-    /** Próxima matrícula livre (maior existente + 1), com 6 dígitos. */
     public String proximaMatricula() {
         int maior = funcionarios.stream()
                 .map(Funcionario::getMatricula)
@@ -86,12 +73,7 @@ public class FuncionarioService {
         return String.format("%06d", maior + 1);
     }
 
-    /**
-     * Cadastra um novo funcionário e grava o arquivo.
-     *
-     * @throws ValidacaoException   se a matrícula ou o CPF já estiverem cadastrados
-     * @throws PersistenciaException se não for possível gravar o arquivo
-     */
+
     public void cadastrar(Funcionario novo) {
         Objects.requireNonNull(novo, "funcionário");
         if (funcionarios.stream().anyMatch(f -> f.getMatricula().equals(novo.getMatricula()))) {
@@ -109,12 +91,7 @@ public class FuncionarioService {
         }
     }
 
-    /**
-     * Exclui o funcionário da matrícula informada e grava o arquivo.
-     *
-     * @throws ValidacaoException   se a matrícula não existir
-     * @throws PersistenciaException se não for possível gravar o arquivo
-     */
+
     public void excluir(String matricula) {
         Funcionario alvo = buscarPorMatricula(matricula)
                 .orElseThrow(() -> new ValidacaoException("Funcionário de matrícula " + matricula + " não encontrado."));

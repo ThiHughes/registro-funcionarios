@@ -1,6 +1,5 @@
 package br.edu.registrofuncionarios.service;
 
-/** Relatórios disponíveis na aba "Relatórios". */
 public enum TipoRelatorio {
 
     TODOS_FUNCIONARIOS("Todos os funcionários"),

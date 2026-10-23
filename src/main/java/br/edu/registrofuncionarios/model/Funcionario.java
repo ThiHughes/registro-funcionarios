@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Funcionário da empresa. Objeto imutável: os dados são validados e normalizados na construção
- * e a identidade (equals/hashCode) é a matrícula.
- */
+
 public final class Funcionario {
 
     public static final int IDADE_MINIMA = 18;
@@ -49,10 +46,7 @@ public final class Funcionario {
         this.endereco = endereco;
     }
 
-    /**
-     * Valida os dados pessoais/profissionais e devolve a lista de mensagens de erro (vazia se tudo estiver válido).
-     * Permite que a interface mostre todos os problemas de uma só vez.
-     */
+
     public static List<String> validar(String matricula, String nome, String cpf, LocalDate dataNascimento,
                                        String cargo, BigDecimal salario, LocalDate dataContratacao) {
         List<String> erros = new ArrayList<>();

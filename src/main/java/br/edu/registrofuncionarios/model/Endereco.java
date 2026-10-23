@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/**
- * Endereço de um funcionário. Objeto imutável: os dados são validados e normalizados na construção.
- */
+
 public final class Endereco {
 
     private final String logradouro;
@@ -36,10 +34,7 @@ public final class Endereco {
         this.cep = Validador.normalizarCep(cep.strip());
     }
 
-    /**
-     * Valida todos os campos e devolve a lista de mensagens de erro (vazia se tudo estiver válido).
-     * O complemento é opcional.
-     */
+
     public static List<String> validar(String logradouro, String numero, String complemento, String bairro,
                                        String cidade, String estado, String cep) {
         List<String> erros = new ArrayList<>();

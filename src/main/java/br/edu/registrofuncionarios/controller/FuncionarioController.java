@@ -49,15 +49,11 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-/**
- * Controlador da janela principal (abas Buscar, Registrar e Relatórios).
- * Trata os eventos da interface e delega as regras de negócio aos serviços.
- */
+
 public class FuncionarioController {
 
     private static final Path ARQUIVO_DADOS = Path.of("funcionarios.csv").toAbsolutePath();
 
-    /** Opções do campo Cargo no cadastro. Edite a lista para adequar aos cargos da empresa. */
     private static final List<String> CARGOS = List.of(
             "Analista", "Assistente", "Auxiliar", "Coordenador", "Desenvolvedor",
             "Diretor", "Estagiário", "Gerente", "Supervisor", "Técnico");
@@ -124,10 +120,7 @@ public class FuncionarioController {
 
     // ================================================================== inicialização
 
-    /**
-     * Chamado pelo FXMLLoader depois de injetar os componentes. Se o arquivo de dados não puder ser lido,
-     * a exceção sobe até o {@code Main}, que informa o erro e encerra (evita sobrescrever dados existentes).
-     */
+
     @FXML
     private void initialize() {
         servico = new FuncionarioService(new CsvFuncionarioRepository(ARQUIVO_DADOS));
@@ -243,7 +236,6 @@ public class FuncionarioController {
         taRelatorio.setPromptText("Escolha o relatório, informe os parâmetros (se houver) e clique em Gerar.");
     }
 
-    /** Habilita apenas os parâmetros usados pelo relatório selecionado. */
     private void atualizarParametrosRelatorio(TipoRelatorio tipo) {
         cbRelatorioCargo.setDisable(tipo != TipoRelatorio.POR_CARGO);
         boolean faixa = tipo == TipoRelatorio.POR_FAIXA_SALARIAL;
@@ -251,7 +243,6 @@ public class FuncionarioController {
         tfRelatorioSalarioMax.setDisable(!faixa);
     }
 
-    /** Filtro de digitação: só aceita texto que case com o regex e respeite o tamanho máximo. */
     private static UnaryOperator<TextFormatter.Change> filtro(String regex, int tamanhoMaximo, boolean maiusculas) {
         return mudanca -> {
             if (maiusculas) {
@@ -264,7 +255,6 @@ public class FuncionarioController {
 
     // ================================================================== aba Buscar
 
-    /** Aplica os filtros combinados (matrícula, cargo e estado); sem filtros, lista todos. */
     @FXML
     private void onBuscar() {
         dadosTabela.setAll(servico.buscar(
@@ -283,7 +273,6 @@ public class FuncionarioController {
         dadosTabela.setAll(servico.listarTodos());
     }
 
-    /** Exclui o funcionário selecionado na tabela (menu Edit > Delete ou tecla Delete), após confirmação. */
     @FXML
     private void onExcluir() {
         Funcionario selecionado = tableRegistroFuncionarios.getSelectionModel().getSelectedItem();
@@ -356,7 +345,6 @@ public class FuncionarioController {
         }
     }
 
-    /** Lê o salário digitado no spinner (texto do editor); retorna null se estiver inválido. */
     private BigDecimal lerSalario() {
         try {
             return Formatos.parseMoeda(spinCadastroSalario.getEditor().getText());
@@ -658,7 +646,6 @@ public class FuncionarioController {
 
     // ================================================================== utilitários de interface
 
-    /** Atualiza as listas de cargos existentes (filtro da busca e relatório), preservando a seleção. */
     private void atualizarListasDeCargos() {
         List<String> cargos = servico.listarCargos();
         atualizarItens(cbFiltroCargo, cargos);

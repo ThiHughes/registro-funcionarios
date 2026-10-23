@@ -22,13 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Persistência em arquivo CSV (UTF-8) com campos separados por ponto e vírgula.
- * <p>
- * Colunas: matricula;nome;cpf;dataNascimento;cargo;salario;dataContratacao;
- * logradouro;numero;complemento;bairro;cidade;estado;cep. As datas são gravadas no formato ISO (aaaa-MM-dd)
- * e o salário com ponto decimal. Campos que contenham ';' ou aspas são protegidos com aspas duplas.
- */
+
 public class CsvFuncionarioRepository implements FuncionarioRepository {
 
     private static final char SEPARADOR = ';';
@@ -169,7 +163,6 @@ public class CsvFuncionarioRepository implements FuncionarioRepository {
         return valor;
     }
 
-    /** Divide uma linha CSV respeitando campos entre aspas duplas ("" representa uma aspa literal). */
     static List<String> dividirLinha(String linha) {
         List<String> campos = new ArrayList<>();
         StringBuilder atual = new StringBuilder();
