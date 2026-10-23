@@ -17,6 +17,8 @@ public class Main extends Application {
             Parent raiz = loader.load();
             palco.setTitle("Registro de Funcionários");
             palco.setScene(new Scene(raiz));
+            palco.setHeight(720);
+            palco.setWidth(1080);
             palco.show();
         } catch (Exception e) {
             Throwable causa = e;
