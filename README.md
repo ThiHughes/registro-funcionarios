@@ -5,7 +5,7 @@ Sistema de cadastro de funcionários com interface JavaFX (FXML criado no Scene 
 
 ## Como executar
 
-Requisitos: JDK 23+ e Maven (ou abra o projeto no IntelliJ como projeto Maven).
+Requisitos: JDK 17 e Maven (ou abra o projeto no IntelliJ como projeto Maven).
 
 ```bash
 mvn javafx:run
