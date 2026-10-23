@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.registrofuncionarios.controller.FuncionarioController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onFechar" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onExcluir" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onSobre" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="787.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro de Funcionários">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <TabPane prefHeight="219.0" prefWidth="787.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+          <Tab text="Buscar">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="26.0" prefWidth="787.0">
+                           <children>
+                              <VBox prefHeight="53.0" prefWidth="145.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Matrícula">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="tfFiltroMatricula" onAction="#onBuscar" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="60.0" prefWidth="164.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <ComboBox fx:id="cbFiltroCargo" prefHeight="26.0" prefWidth="180.0">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="48.0" prefWidth="162.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estado">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="tfFiltroEstado" onAction="#onBuscar" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="38.0" prefWidth="787.0">
+                           <children>
+                              <Button fx:id="btnFiltroBuscar" mnemonicParsing="false" onAction="#onBuscar" prefHeight="26.0" prefWidth="62.0" text="Buscar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnFiltroLimpar" mnemonicParsing="false" onAction="#onLimpar" text="Limpar" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tableRegistroFuncionarios" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colMatricula" prefWidth="75.0" text="Matrícula" />
+                            <TableColumn fx:id="colNome" prefWidth="75.0" text="Nome" />
+                              <TableColumn fx:id="colCPF" prefWidth="75.0" text="CPF" />
+                              <TableColumn fx:id="colCargo" prefWidth="75.0" text="Cargo" />
+                              <TableColumn fx:id="colSalario" prefWidth="75.0" text="Salário" />
+                              <TableColumn fx:id="colDataNascimento" prefWidth="75.0" text="Data Nascimento" />
+                              <TableColumn fx:id="colDataContratacao" prefWidth="75.0" text="Data Contratação" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Registrar">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="838.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dados do Funcionário" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <FlowPane hgap="10.0" prefHeight="146.0" prefWidth="818.0" vgap="10.0">
+                           <children>
+                              <VBox prefHeight="10.0" prefWidth="150.0">
+                                 <children>
+                                    <HBox prefHeight="0.0" prefWidth="150.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome " />
+                                          <Text fill="#fa0000" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroNome" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="5.0" prefWidth="158.0">
+                                 <children>
+                                    <HBox prefHeight="0.0" prefWidth="158.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CPF " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroCPF" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="6.0" prefWidth="128.0">
+                                 <children>
+                                    <HBox prefHeight="0.0" prefWidth="128.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <ComboBox fx:id="cbCadastroCargo" prefWidth="150.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="10.0" prefWidth="104.0">
+                                 <children>
+                                    <HBox prefHeight="0.0" prefWidth="150.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Salário " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <Spinner fx:id="spinCadastroSalario" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="10.0" prefWidth="130.0">
+                                 <children>
+                                    <HBox prefHeight="0.0" prefWidth="130.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data Nascimento " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <DatePicker fx:id="dpCadastroDataNascimento" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="22.0" prefWidth="114.0">
+                                 <children>
+                                    <HBox prefHeight="19.0" prefWidth="114.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data Contratação " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <DatePicker fx:id="dpCadastroDataContratacao" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </FlowPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <FlowPane hgap="10.0" prefHeight="126.0" prefWidth="818.0" vgap="10.0">
+                           <children>
+                              <VBox prefHeight="43.0" prefWidth="39.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UF " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroUF" prefWidth="61.0" />
+                                 </children>
+                                 <FlowPane.margin>
+                                    <Insets />
+                                 </FlowPane.margin>
+                              </VBox>
+                              <VBox prefHeight="22.0" prefWidth="98.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroCidade" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="22.0" prefWidth="98.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroCEP" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="43.0" prefWidth="169.0">
+                                 <children>
+                                    <HBox prefHeight="18.0" prefWidth="124.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Logradouro " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroLogradouro" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="43.0" prefWidth="74.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numero " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroNumero" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="43.0" prefWidth="130.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro " />
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroBairro" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="43.0" prefWidth="253.0">
+                                 <children>
+                                    <HBox prefHeight="20.0" prefWidth="100.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Complemento " />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="tfCadastroComplemento">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </FlowPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <HBox prefHeight="119.0" prefWidth="787.0">
+                           <children>
+                              <Button fx:id="btnCadastroFuncionario" mnemonicParsing="false" onAction="#onCadastrar" text="Registrar Funcionário" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Relatórios">
+               <content>
+                  <VBox spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <HBox alignment="BOTTOM_LEFT" spacing="10.0">
+                           <children>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relatório" />
+                                    <ComboBox fx:id="cbRelatorioTipo" prefWidth="250.0" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cargo" />
+                                    <ComboBox fx:id="cbRelatorioCargo" prefWidth="150.0" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Salário mínimo" />
+                                    <TextField fx:id="tfRelatorioSalarioMin" prefWidth="110.0" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Salário máximo" />
+                                    <TextField fx:id="tfRelatorioSalarioMax" prefWidth="110.0" />
+                                 </children>
+                              </VBox>
+                              <Button fx:id="btnRelatorioGerar" mnemonicParsing="false" onAction="#onGerarRelatorio" text="Gerar" />
+                              <Button fx:id="btnRelatorioLimpar" mnemonicParsing="false" onAction="#onLimparRelatorio" text="Limpar" />
+                              <Button fx:id="btnRelatorioExportarCsv" mnemonicParsing="false" onAction="#onExportarRelatorioCsv" text="Exportar CSV" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="taRelatorio" editable="false" wrapText="false" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

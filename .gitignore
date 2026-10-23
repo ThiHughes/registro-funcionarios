@@ -1,0 +1,6 @@
+target/
+.idea/
+*.iml
+funcionarios.csv
+funcionarios.csv.tmp
+funcionarios.csv.bak
